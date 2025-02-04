@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.hamcrest.Matchers.*;
 
 public class TestUserCreation {
@@ -44,6 +45,7 @@ public class TestUserCreation {
                 .body("success", equalTo(true));
         isUserCreated = true; // ловим созданного пользователя
     }
+
     @Test
     @Description("Проверка создания пользователя c пустым email")
     @Step("Попытка создания пользователя с пустым email")
@@ -56,6 +58,7 @@ public class TestUserCreation {
                 .body("message", equalTo("Email, password and name are required fields"));
 
     }
+
     @Test
     @Description("Проверка ручки создания существующего пользователя")
     @Step("Создание пользователя с существующим email")

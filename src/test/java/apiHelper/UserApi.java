@@ -1,5 +1,6 @@
 package apiHelper;
 import com.google.gson.Gson;
+import io.restassured.mapper.ObjectMapper;
 import io.restassured.response.Response;
 
 public class UserApi extends BaseHttpClient {
@@ -45,4 +46,15 @@ public class UserApi extends BaseHttpClient {
         return doPatchRequest(API_USER_PATH, body);
     }
 
+    public Response changeUserWrongToken(String email, String password, String body){
+        // Логин для получения токена пользователя
+        UserLoginApi.LoginRequest loginRequest = new UserLoginApi.LoginRequest(email, password); //ничего лучше не придумал
+        Response response = doPostRequest(API_LOGIN_PATH, gson.toJson(loginRequest));
+
+        // Получаем Токен пользователя из ответа
+        String userToken = response.jsonPath().getString("accessToken");
+
+        // Меняем данные пользователя
+        return doPatchRequest(API_USER_PATH, userToken + "wrong", body);
+    }
 }
