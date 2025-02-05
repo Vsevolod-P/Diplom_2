@@ -42,6 +42,15 @@ public abstract class BaseHttpClient {
                 .thenReturn();
     }
 
+    public Response doPostRequest(String path, Object token, Object body) {
+        return given()
+                .spec(baseRequestSpec)
+                .header("Authorization", token)
+                .body(body)
+                .post(path)
+                .thenReturn();
+    }
+
     public Response doDeleteRequest(String path, Object token) {
         return given()
                 .spec(baseRequestSpec)
@@ -49,4 +58,26 @@ public abstract class BaseHttpClient {
                 .delete(path)
                 .thenReturn();
     }
+     public String doGetRequestString(String path) {
+         return given()
+                 .spec(baseRequestSpec)
+                 .get(path)
+                 .thenReturn()
+                 .getBody()
+                 .asString();
+     }
+    public Response doGetRequest(String path) {
+        return given()
+                .spec(baseRequestSpec)
+                .get(path)
+                .thenReturn();
+    }
+    public Response doGetRequest(String path, Object token) {
+        return given()
+                .spec(baseRequestSpec)
+                .header("Authorization", token)
+                .get(path)
+                .thenReturn();
+    }
+
 }

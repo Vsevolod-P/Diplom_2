@@ -1,6 +1,5 @@
 package apiHelper;
 import com.google.gson.Gson;
-import io.restassured.mapper.ObjectMapper;
 import io.restassured.response.Response;
 
 public class UserApi extends BaseHttpClient {
